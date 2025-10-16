@@ -20,5 +20,12 @@ export interface ModelOption {
 
 export interface StreamChunk {
   type: 'tool' | 'content' | 'image' | 'done' | 'error';
-  data: any;
+  data: {
+    tool?: string;
+    reasoning?: string;
+    content?: string;
+    imageUrl?: string;
+    prompt?: string;
+    message?: string;
+  };
 }

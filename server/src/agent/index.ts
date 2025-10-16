@@ -88,7 +88,7 @@ export class MegaAgent {
             if (content) {
               yield { type: 'content', data: { content } };
             }
-          } catch (e) {
+          } catch {
             // Skip invalid JSON
           }
         }
@@ -166,7 +166,7 @@ export class MegaAgent {
             if (content) {
               yield { type: 'content', data: { content } };
             }
-          } catch (e) {
+          } catch {
             // Skip invalid JSON
           }
         }

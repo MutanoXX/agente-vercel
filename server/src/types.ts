@@ -15,10 +15,17 @@ export interface AgentConfig {
 export interface ToolDecision {
   tool: 'text' | 'image' | 'search' | 'hybrid';
   reasoning: string;
-  params: Record<string, any>;
+  params: Record<string, boolean | string | number>;
 }
 
 export interface StreamChunk {
   type: 'tool' | 'content' | 'image' | 'done' | 'error';
-  data: any;
+  data: {
+    tool?: string;
+    reasoning?: string;
+    content?: string;
+    imageUrl?: string;
+    prompt?: string;
+    message?: string;
+  };
 }
