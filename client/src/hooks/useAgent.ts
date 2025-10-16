@@ -58,7 +58,7 @@ export function useAgent() {
 
                 switch (data.type) {
                   case 'tool':
-                    setCurrentTool(data.data.reasoning);
+                    setCurrentTool(data.data.reasoning || null);
                     setMessages((prev) => {
                       const updated = [...prev];
                       const lastMsg = updated[updated.length - 1];
