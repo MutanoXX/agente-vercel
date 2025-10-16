@@ -16,7 +16,7 @@ export class MegaAgent {
   async *processPrompt(prompt: string): AsyncGenerator<StreamChunk> {
     try {
       // Step 1: Decide which tools to use
-      const decision = await this.decisionMaker.decideTools(prompt);
+      const decision = this.decisionMaker.decideTools(prompt);
 
       // Step 2: Emit tool decision
       yield {
@@ -62,7 +62,15 @@ export class MegaAgent {
       true
     );
 
-    const reader = (response as any).body.getReader();
+    if (!response || typeof response === 'string') {
+      throw new Error('Expected streaming response');
+    }
+
+    const reader = response.body?.getReader();
+    if (!reader) {
+      throw new Error('No reader available');
+    }
+
     const decoder = new TextDecoder();
 
     while (true) {
@@ -132,7 +140,15 @@ export class MegaAgent {
       true
     );
 
-    const reader = (response as any).body.getReader();
+    if (!response || typeof response === 'string') {
+      throw new Error('Expected streaming response');
+    }
+
+    const reader = response.body?.getReader();
+    if (!reader) {
+      throw new Error('No reader available');
+    }
+
     const decoder = new TextDecoder();
 
     while (true) {

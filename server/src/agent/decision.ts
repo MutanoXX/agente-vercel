@@ -4,7 +4,7 @@ export class AgentDecisionMaker {
   /**
    * Analyzes user prompt and decides which tool(s) to use
    */
-  async decideTools(prompt: string): Promise<ToolDecision> {
+  decideTools(prompt: string): ToolDecision {
     const lowerPrompt = prompt.toLowerCase();
 
     // Image generation keywords

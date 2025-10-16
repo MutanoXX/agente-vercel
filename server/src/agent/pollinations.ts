@@ -1,5 +1,3 @@
-import fetch from 'node-fetch';
-
 export class PollinationsAPI {
   private baseTextUrl = 'https://text.pollinations.ai';
   private baseImageUrl = 'https://image.pollinations.ai/prompt';
@@ -14,7 +12,7 @@ export class PollinationsAPI {
     const response = await fetch(url);
 
     if (stream) {
-      return response as any;
+      return response;
     }
 
     return await response.text();
