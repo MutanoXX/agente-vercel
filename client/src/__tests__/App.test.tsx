@@ -3,64 +3,89 @@ import { render, screen, waitFor } from '@testing-library/react';
 import App from '../App';
 
 // Define types
-type ApiResponse = {
-  message: string;
+type ModelsResponse = {
+  textModels: Array<{ id: string; name: string }>;
+  imageModels: Array<{ id: string; name: string }>;
+  searchModels: Array<{ id: string; name: string }>;
 };
 
 // Mock the fetch API
 globalThis.fetch = vi.fn() as unknown as typeof fetch;
 
-function mockFetchResponse(data: ApiResponse) {
+function mockModelsResponse(): ModelsResponse {
   return {
-    json: vi.fn().mockResolvedValue(data),
-    ok: true,
+    textModels: [
+      { id: 'openai', name: 'OpenAI GPT' },
+      { id: 'mistral', name: 'Mistral' },
+    ],
+    imageModels: [
+      { id: 'flux', name: 'Flux' },
+      { id: 'turbo', name: 'Turbo' },
+    ],
+    searchModels: [
+      { id: 'openai', name: 'OpenAI GPT' },
+      { id: 'claude', name: 'Claude' },
+    ],
   };
 }
 
 describe('App Component', () => {
   beforeEach(() => {
     vi.clearAllMocks();
-    // Default mock implementation
-    (globalThis.fetch as unknown as Mock).mockResolvedValue(
-      mockFetchResponse({ message: 'Test Message from API' })
-    );
+    // Mock the models API endpoint
+    (globalThis.fetch as unknown as Mock).mockResolvedValue({
+      json: vi.fn().mockResolvedValue(mockModelsResponse()),
+      ok: true,
+    });
   });
 
   it('renders App component correctly', () => {
     render(<App />);
-    expect(screen.getByText('Mentat Template JS')).toBeInTheDocument();
-    expect(screen.getByText(/Frontend: React, Vite/)).toBeInTheDocument();
-    expect(screen.getByText(/Backend: Node.js, Express/)).toBeInTheDocument();
+    expect(screen.getByText('🤖 Pollinations Mega Agent')).toBeInTheDocument();
+    expect(screen.getByText('Powered by pollinations.ai')).toBeInTheDocument();
+  });
+
+  it('loads and displays welcome message', async () => {
+    render(<App />);
+
+    // Should show welcome message
+    expect(screen.getByText('👋 Bem-vindo ao Mega Agent!')).toBeInTheDocument();
     expect(
-      screen.getByText(/Utilities: Typescript, ESLint, Prettier/)
+      screen.getByText(
+        /Envie uma mensagem e deixe o agente decidir qual ferramenta usar/
+      )
     ).toBeInTheDocument();
   });
 
-  it('loads and displays API message', async () => {
+  it('fetches and displays model options', async () => {
     render(<App />);
 
-    // Should initially show loading message
-    expect(screen.getByText(/Loading message from server/)).toBeInTheDocument();
-
-    // Wait for the fetch to resolve and check if the message is displayed
+    // Wait for models to be fetched
     await waitFor(() => {
-      expect(screen.getByText('Test Message from API')).toBeInTheDocument();
+      expect(globalThis.fetch).toHaveBeenCalledWith('/api/agent/models');
     });
-
-    expect(globalThis.fetch).toHaveBeenCalledWith('/api');
   });
 
-  it('handles API error', async () => {
-    // Mock a failed API call
-    (globalThis.fetch as unknown as Mock).mockRejectedValue(
-      new Error('API Error')
-    );
-
+  it('displays model selectors', () => {
     render(<App />);
 
-    // Wait for the error message to appear
-    await waitFor(() => {
-      expect(screen.getByText(/Error: API Error/)).toBeInTheDocument();
-    });
+    // Check for model selector labels
+    expect(screen.getByText('💬 Modelo de Chat')).toBeInTheDocument();
+    expect(screen.getByText('🎨 Modelo de Imagem')).toBeInTheDocument();
+    expect(screen.getByText('🔍 Modelo de Pesquisa')).toBeInTheDocument();
+  });
+
+  it('displays example prompts', () => {
+    render(<App />);
+
+    expect(
+      screen.getByText('"Gerar imagem de um gato astronauta"')
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText('"Pesquisar sobre inteligência artificial"')
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText('"Explique como funciona o React"')
+    ).toBeInTheDocument();
   });
 });

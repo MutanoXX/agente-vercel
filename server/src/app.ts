@@ -2,6 +2,7 @@ import express, { Request, Response } from 'express';
 import cors from 'cors';
 import path from 'path';
 import { existsSync } from 'fs';
+import agentRouter from './routes/agent';
 
 export const app = express();
 export const PORT = process.env.PORT || 5000;
@@ -12,9 +13,12 @@ app.use(cors()); // Enable CORS for frontend communication
 app.use(express.json()); // Parse JSON bodies
 app.use(express.static(CLIENT_DIST_PATH)); // Serve static files from client/dist
 
+// API Routes
+app.use('/api/agent', agentRouter);
+
 // Basic route
 app.get('/api', (req: Request, res: Response) => {
-  res.json({ message: 'Welcome to the Mentat API!' });
+  res.json({ message: 'Welcome to the Pollinations Mega Agent API!' });
 });
 
 // Serve React app or fallback page

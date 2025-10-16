@@ -1,24 +1,163 @@
-# Mentat Template JS
+# 🤖 Pollinations Mega Agent
 
-A full-stack JavaScript template project with React frontend and Express backend, both using TypeScript.
+Um agente inteligente que integra todas as funcionalidades do **pollinations.ai** com uma interface web moderna e interativa.
 
-## Getting Started
+## ✨ Características
 
-1. Create a new repository using this template. On the [repository page](https://github.com/AbanteAI/mentat-template-js), click "Use this template" on the top right, then select 'Create a new repository'.
+### 🎯 Agente Inteligente
 
-2. On the next screen, choose a name for your project, then click 'Create repository'.
+- **Decisão Automática**: O agente analisa seu prompt e decide automaticamente qual ferramenta usar
+- **Múltiplas Ferramentas**: Chat, geração de imagens, pesquisa web e modo híbrido
+- **Streaming em Tempo Real**: Respostas aparecem conforme são geradas
 
-3. Install Mentat on your GitHub account, if you haven't already. See instructions [here](https://mentat.ai/docs).
+### 🎨 Interface Moderna
 
-4. Add the new repository to your Mentat Installation.
+- **Dark Theme**: Interface escura com detalhes brancos
+- **Seleção de Modelos**: Escolha modelos diferentes para chat, imagem e pesquisa
+- **Animações Suaves**: Efeitos visuais modernos e transições fluidas
+- **Indicadores de Ferramentas**: Visualização decorada das ferramentas sendo usadas
 
-a. If you're installing Mentat for the first time, select your new repository on the 'Setup Installation' page.
-b. If you've already installed Mentat, go to the [settings page](https://mentat.ai/settings) and click 'Manage Repositories', and select your new repository from the drop-down menu to add it to your installation.
+### 🚀 Tecnologias
 
-5. If Mentat was installed properly, you should see an open GitHub issue in your new repository called 'MentatBot Setup'. This issue will guide you through advanced configuration.
+**Frontend**
 
-You're all set! You can begin using Mentat by
+- React 19 com TypeScript
+- Vite para build rápido
+- CSS moderno com variáveis e animações
+- Hooks customizados para gerenciamento de estado
 
-- Creating a new issue and tagging '@MentatBot'
-- Pushing PRs to your repository and having Mentat review them
-- Chatting wtih Mentat about your project from the [Mentat website](https://mentat.ai)
+**Backend**
+
+- Express com TypeScript
+- Integração completa com pollinations.ai
+- Sistema de decisão inteligente
+- Suporte a Server-Sent Events (SSE) para streaming
+
+**Deployment**
+
+- Otimizado para Vercel
+- Configuração serverless
+- Build automático
+
+## 🛠️ Instalação Local
+
+```bash
+# Instalar dependências
+npm install
+
+# Iniciar em modo desenvolvimento
+npm run dev
+
+# Build para produção
+npm run build
+
+# Iniciar em produção
+npm start
+```
+
+## 🌐 Deploy no Vercel
+
+1. Faça fork deste repositório
+2. Conecte seu repositório ao Vercel
+3. O Vercel detectará automaticamente as configurações
+4. Deploy! 🚀
+
+Ou use o Vercel CLI:
+
+```bash
+npm i -g vercel
+vercel
+```
+
+## 📖 Como Usar
+
+1. **Selecione os Modelos**: Use a barra lateral para escolher os modelos de IA
+2. **Digite sua Mensagem**: Escreva o que você quer no campo de entrada
+3. **Deixe o Agente Decidir**: O agente analisará e usará a ferramenta apropriada
+4. **Veja os Resultados**: Respostas aparecem em tempo real com streaming
+
+### Exemplos de Prompts
+
+**Para Chat:**
+
+- "Explique como funciona o React"
+- "Me conte uma história sobre robôs"
+
+**Para Geração de Imagens:**
+
+- "Gerar imagem de um gato astronauta"
+- "Criar imagem de uma cidade futurista"
+
+**Para Pesquisa:**
+
+- "Pesquisar sobre inteligência artificial"
+- "Buscar informações sobre mudanças climáticas"
+
+**Modo Híbrido:**
+
+- "Pesquisar sobre dragões e gerar uma imagem"
+
+## 🔧 Configuração
+
+### Modelos Disponíveis
+
+**Chat/Texto:**
+
+- OpenAI GPT
+- Mistral
+- Llama
+- Claude
+
+**Imagens:**
+
+- Flux
+- Flux Pro
+- Flux Realism
+- Turbo
+
+**Pesquisa:**
+
+- OpenAI GPT
+- Mistral
+- Claude
+
+## 📝 Estrutura do Projeto
+
+```
+├── client/                 # Frontend React
+│   ├── src/
+│   │   ├── components/    # Componentes React
+│   │   ├── hooks/         # Custom hooks
+│   │   ├── types.ts       # TypeScript types
+│   │   ├── App.tsx        # Componente principal
+│   │   └── styles.css     # Estilos globais
+│   └── package.json
+│
+├── server/                 # Backend Express
+│   ├── src/
+│   │   ├── agent/         # Sistema do agente
+│   │   │   ├── decision.ts    # Lógica de decisão
+│   │   │   ├── pollinations.ts # API pollinations.ai
+│   │   │   └── index.ts       # Agente principal
+│   │   ├── routes/        # Rotas da API
+│   │   ├── types.ts       # TypeScript types
+│   │   ├── app.ts         # Configuração Express
+│   │   └── server.ts      # Entry point
+│   └── package.json
+│
+├── vercel.json            # Configuração Vercel
+└── package.json           # Scripts principais
+```
+
+## 🤝 Contribuindo
+
+Contribuições são bem-vindas! Sinta-se à vontade para abrir issues e pull requests.
+
+## 📄 Licença
+
+MIT
+
+## 🙏 Créditos
+
+- Powered by [pollinations.ai](https://pollinations.ai)
+- Built with [Mentat](https://mentat.ai)
